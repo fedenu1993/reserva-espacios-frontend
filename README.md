@@ -1,27 +1,25 @@
-# ReservaEspaciosFrontend
+Este es un proyecto Angular que permite gestionar reservas. Esta guía te ayudará a configurar y ejecutar la aplicación Angular desde cero.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+<!-- Requisitos Previos -->
+Asegúrate de tener instalados los siguientes programas en tu máquina:
 
-## Development server
+    Node.js (versión >= 14)
+    Angular CLI (instalado globalmente)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<!-- Instalación de Dependencias -->
+Ejecuta el siguiente comando para instalar las dependencias:
 
-## Code scaffolding
+    npm install
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<!-- Configuración del Entorno -->
+Configura la URL del backend en el archivo src/environments/environment.ts. Asegúrate de que tenga el siguiente contenido:
 
-## Build
+    export const environment = {
+        production: false,
+        apiUrl: 'http://localhost:8000/api' // Cambia esto si tu API está en otra dirección
+    };
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<!-- Ejecución de la Aplicación -->
+Ejecuta el siguiente comando para iniciar la aplicación:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ng serve

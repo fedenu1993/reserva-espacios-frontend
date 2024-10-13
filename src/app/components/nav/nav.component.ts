@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -10,13 +11,15 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavComponent implements OnInit {
   user: User | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.authService.getUser().subscribe({
       next: (user: any) => {
         this.user = user;
-        console.log(this.user)
       },
       error: (err) => {
         console.error('Error al obtener User ID:', err);
@@ -26,6 +29,10 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authService.logout(); // Método para manejar el deslogueo
-    // Redirigir a la página de inicio o login si es necesario
+    this.router.navigate(['/login']); // Redirigir al login 
   }
+
+
+
+
 }

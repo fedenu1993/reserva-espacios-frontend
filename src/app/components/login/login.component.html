@@ -26,12 +26,22 @@
         </mat-error>
       </mat-form-field>
   
-      <!-- Botón de login -->
-      <div class="button-container">
-        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
-          Iniciar Sesión
-        </button>
+
+      <div style="display: flex; justify-content: flex-start;">
+        <!-- Botón de login -->
+        <div class="button-container" style="margin-right: 10px;">
+          <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
+            Iniciar Sesión
+          </button>
+        </div>
+  
+        <div class="button-container">
+          <button (click)="openModalUser()" type="button" mat-raised-button color="error">
+            Crear usuario
+          </button>
+        </div>
       </div>
+
     </form>
   </div>
   

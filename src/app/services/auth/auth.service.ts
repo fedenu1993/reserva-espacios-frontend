@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api'; // URL de login en el backend
+  private apiUrl = environment.apiUrl; // URL de login en el backend
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(this.apiUrl + '/login', credentials).pipe(
       tap((response) => {
-        console.log('aver', response);
         // Almacenar el token en localStorage
         this.setToken(response.token);
       })
@@ -49,7 +50,6 @@ export class AuthService {
           if (error.status === 401) {
             console.error('Token inválido o no autorizado', error);
             this.logout();
-            // Aquí puedes realizar acciones adicionales, como redirigir al login
             return of({ valid: false }); // Devuelve un objeto indicando que el token no es válido
           }
           // Manejo de otros errores
@@ -75,7 +75,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getUser(): Observable<number> {
+  getUser(): Observable<User> {
     const token = localStorage.getItem('token');
 
     return this.http
@@ -86,7 +86,6 @@ export class AuthService {
       })
       .pipe(
         map((response) => {
-          console.log(response);
           return response.user;
         }) // Extrae el user
       );

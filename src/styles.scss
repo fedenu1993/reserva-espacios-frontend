@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 html,
 body {
   height: 100%;
@@ -181,3 +182,16 @@ button {
   padding: 8px 16px; // Espaciado interno
   font-weight: bold; // Negrita para destacar el texto
 }
+
+
+.custom-file-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-file-input label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+

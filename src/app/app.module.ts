@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth/auth.guard';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { EspacioModalComponent } from './components/espacio-modal/espacio-modal.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservaModalComponent } from './components/reserva-modal/reserva-modal.component';
@@ -19,6 +19,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { ReservasAbmComponent } from './pages/reservas-abm/reservas-abm.component';
 import { EspaciosAbmComponent } from './pages/espacios-abm/espacios-abm.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ReservasComponent } from './components/reservas/reservas.component';
+import { ModalUserComponent } from './components/modal-user/modal-user.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { EspaciosAbmComponent } from './pages/espacios-abm/espacios-abm.componen
     NavComponent,
     PrincipalComponent,
     ReservasAbmComponent,
-    EspaciosAbmComponent
+    EspaciosAbmComponent,
+    ConfirmDialogComponent,
+    ReservasComponent,
+    ModalUserComponent
     
   ],
   imports: [
@@ -46,7 +52,8 @@ import { EspaciosAbmComponent } from './pages/espacios-abm/espacios-abm.componen
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthGuard
+    AuthGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

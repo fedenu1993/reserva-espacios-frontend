@@ -1,9 +1,35 @@
+<!-- <nav class="navbar">
+  <div class="navbar-container">
+    <a routerLink="/principal" class="navbar-brand">Mi Aplicación</a>
+    <a *ngIf="user?.role == 'admin'" routerLink="/espacios" class="navbar-link">Espacios</a>
+    <a routerLink="/reservas" class="navbar-link">Reservas</a>
+    <a routerLink="/" (click)="logout()" class="navbar-link">Salir</a>
+  </div>
+</nav> -->
+
+
 <nav class="navbar">
-    <div class="navbar-container">
-      <a routerLink="/" class="navbar-brand">Mi Aplicación</a>
-      <a *ngIf="user?.role == 'admin'" routerLink="/espacios" class="navbar-link">Espacios</a>
-      <a routerLink="/reservas" class="navbar-link">Reservas</a>
-      <a routerLink="/" (click)="logout()" class="navbar-link">Salir</a>
+  <div class="navbar-container">
+    <a routerLink="/principal" class="navbar-brand">Mi Aplicación</a>
+    <a *ngIf="user?.role === 'admin'" routerLink="/espacios" class="navbar-link">Espacios</a>
+    <a routerLink="/reservas" class="navbar-link">Reservas</a>
+
+    <!-- Menú desplegable del perfil -->
+    <div class="navbar-profile" *ngIf="user">
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="navbar-link">
+        {{ user.name }} <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>account_circle</mat-icon>
+          <span>{{ user.name }}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Salir</span>
+        </button>
+      </mat-menu>
     </div>
-  </nav>
-  
+  </div>
+</nav>

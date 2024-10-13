@@ -1,7 +1,6 @@
 export interface Espacio {
   id: number;                  // El ID único del espacio
   nombre: string;              // Nombre del espacio
-  ubicacion: string;           // Ubicación del espacio
   capacidad: number;           // Capacidad máxima del espacio
   disponible: boolean;         // Si el espacio está disponible o no
   imagen: string;              // Puede venir el nombre del archivo o el base64

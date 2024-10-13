@@ -1,27 +1,78 @@
-<!-- <ng-container *ngIf="espacio">
+<ng-container *ngIf="user && espacio" class="scrollable-container">
   <h2 mat-dialog-title>{{ espacio.nombre }}</h2>
+
   <div mat-dialog-content>
-    <p><strong>Capacidad:</strong> {{ espacio.capacidad }}</p>
-    <div class="image-container">
-      <img *ngIf="espacio.imagen" [src]="espacio.imagen" alt="Imagen del espacio" />
-    </div>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cerrar</button>
-  </div>
-</ng-container> -->
+    <form *ngIf="espaciosMode; else viewMode" (ngSubmit)="onSave()">
+      <!-- Campo para el nombre del espacio -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="espacio.nombre" name="nombre" required />
+      </mat-form-field>
 
+      <!-- Campo para el nombre del espacio -->
+      <mat-form-field appearance="fill">
+        <mat-label>Descripcion</mat-label>
+        <input
+          matInput
+          [(ngModel)]="espacio.descripcion"
+          name="descripcion"
+          required
+        />
+      </mat-form-field>
 
-<ng-container *ngIf="espacio">
-  <h2 mat-dialog-title>{{ espacio.nombre }}</h2>
-  <div mat-dialog-content>
-    <p><strong>Capacidad:</strong> {{ espacio.capacidad }}</p>
-    <div class="image-container">
-      <img *ngIf="espacio.imagen" [src]="espacio.imagen" alt="Imagen del espacio" />
-    </div>
+      <!-- Campo para la capacidad del espacio -->
+      <mat-form-field appearance="fill">
+        <mat-label>Capacidad</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="espacio.capacidad"
+          name="capacidad"
+          min="1"
+          required
+        />
+      </mat-form-field>
 
-    <full-calendar [options]="calendarOptions"></full-calendar>
+      <!-- Contenedor para mostrar la imagen actual del espacio -->
+      <div class="image-container">
+        <img
+          *ngIf="espacio.imagen"
+          [src]="espacio.imagen"
+          alt="Imagen del espacio"
+        />
+      </div>
+
+      <!-- Input para modificar la imagen del espacio -->
+      <div class="custom-file-input">
+        <label for="file">Modificar imagen</label>
+        <input
+          id="file"
+          type="file"
+          (change)="onImageChange($event)"
+          accept="image/*"
+        />
+      </div>
+
+      <!-- Botón para guardar los cambios -->
+      <button mat-button type="submit">Guardar</button>
+    </form>
+
+    <!-- Vista de solo lectura cuando espaciosMode es falso -->
+    <ng-template #viewMode>
+      <p><strong>Descripcion:</strong> {{ espacio.descripcion }}</p>
+      <p><strong>Capacidad:</strong> {{ espacio.capacidad }}</p>
+      <div class="image-container">
+        <img
+          *ngIf="espacio.imagen"
+          [src]="espacio.imagen"
+          alt="Imagen del espacio"
+        />
+      </div>
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </ng-template>
   </div>
+
+  <!-- Botón para cerrar el diálogo -->
   <div mat-dialog-actions>
     <button mat-button (click)="onClose()">Cerrar</button>
   </div>

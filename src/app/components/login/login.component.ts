@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private notificacionService: NotificacionService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,6 +46,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         () => {
+          this.notificacionService.showSuccess('Login exitoso!')
           this.router.navigate(['/principal']); // Redirigir al listado de espacios tras login exitoso
         },
         error => {
@@ -51,6 +55,19 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+
+  openModalUser(): void {
+    const dialogRef = this.dialog.open(ModalUserComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        
+      }
+    });
   }
 
 }

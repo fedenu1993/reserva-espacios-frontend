@@ -48,7 +48,15 @@ export class ReservaModalComponent{
 
   onSave(): void {
     // if(this.mismoUserId && !this.crear){
+    console.log(this.data)
       this.dialogRef.close(this.data);
     // }
   }
+
+  onFieldChange(field: string, value: any): void {
+    console.log(`Campo ${field} cambiado:`, value);
+    this.data[field] = value; // Asegurar que los cambios se reflejan en `data`
+  }
+
+
 }
