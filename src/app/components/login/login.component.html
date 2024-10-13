@@ -1,0 +1,37 @@
+<div class="login-container">
+    <div *ngIf="loading" class="loader">Cargando...</div> <!-- Mostrar loader cuando loading es true -->
+
+    <form *ngIf="!loading" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Campo de correo electrónico -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Ingresa tu email" required>
+        <mat-error *ngIf="loginForm.get('email')!.hasError('required')">
+          El correo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('email')!.hasError('email')">
+          Ingresa un correo válido
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Campo de contraseña -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Ingresa tu contraseña" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" type="button" aria-label="Mostrar/Ocultar contraseña">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')!.hasError('required')">
+          La contraseña es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Botón de login -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
+          Iniciar Sesión
+        </button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,62 @@
+<div class="input-container">
+  <mat-form-field>
+    <mat-label>Buscar por nombre</mat-label>
+    <input matInput placeholder="Ingrese texto" [(ngModel)]="filterText">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Buscar por capacidad</mat-label>
+    <input matInput type="number" placeholder="Ingrese número" [(ngModel)]="filterNumber">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Buscar por fecha</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="Seleccione fecha" [(ngModel)]="filterDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="loadEspacios()">Buscar</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin-top: 50px;">
+  <!-- Definición de la columna ID -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let espacio">{{ espacio.id }}</td>
+  </ng-container>
+
+  <!-- Definición de la columna Nombre -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let espacio">{{ espacio.nombre }}</td>
+  </ng-container>
+
+  <!-- Definición de la columna Capacidad -->
+  <ng-container matColumnDef="capacidad">
+    <th mat-header-cell *matHeaderCellDef>Capacidad</th>
+    <td mat-cell *matCellDef="let espacio">{{ espacio.capacidad }}</td>
+  </ng-container>
+
+  <!-- Definición de la columna Acciones -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let espacio">
+      <button mat-button (click)="verEspacio(espacio.id)">Ver</button>
+      <button mat-button (click)="editarEspacio(espacio.id)">Editar</button>
+      <button mat-button (click)="eliminarEspacio(espacio.id)">Eliminar</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [length]="totalElements"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 25]"
+  showFirstLastButtons
+  (page)="onPageChange($event)"
+>
+</mat-paginator>

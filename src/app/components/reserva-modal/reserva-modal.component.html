@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{!data.id ? "Crear Reserva" : "Ver Reserva"}}</h2>
+<mat-dialog-content>
+  <form #reservationForm="ngForm">
+    <mat-form-field class="mat-form" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" required>
+    </mat-form-field>
+    <mat-form-field class="mat-form" appearance="outline">
+      <mat-label>Fecha</mat-label>
+      <input matInput [(ngModel)]="data.fecha" name="fecha" required readonly>
+    </mat-form-field>
+    <mat-form-field class="mat-form" appearance="outline">
+      <mat-label>Hora Inicio</mat-label>
+      <input matInput [(ngModel)]="data.hora_inicio" name="hora_inicio" required>
+    </mat-form-field>
+    <mat-form-field class="mat-form" appearance="outline">
+      <mat-label>Hora Fin</mat-label>
+      <input matInput [(ngModel)]="data.hora_fin" name="hora_fin" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button *ngIf="crear || mismoUserId" mat-button (click)="onSave()" [disabled]="!reservationForm.valid">Guardar</button>
+</mat-dialog-actions>

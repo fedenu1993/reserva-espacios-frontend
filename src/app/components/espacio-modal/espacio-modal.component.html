@@ -1,0 +1,28 @@
+<!-- <ng-container *ngIf="espacio">
+  <h2 mat-dialog-title>{{ espacio.nombre }}</h2>
+  <div mat-dialog-content>
+    <p><strong>Capacidad:</strong> {{ espacio.capacidad }}</p>
+    <div class="image-container">
+      <img *ngIf="espacio.imagen" [src]="espacio.imagen" alt="Imagen del espacio" />
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </div>
+</ng-container> -->
+
+
+<ng-container *ngIf="espacio">
+  <h2 mat-dialog-title>{{ espacio.nombre }}</h2>
+  <div mat-dialog-content>
+    <p><strong>Capacidad:</strong> {{ espacio.capacidad }}</p>
+    <div class="image-container">
+      <img *ngIf="espacio.imagen" [src]="espacio.imagen" alt="Imagen del espacio" />
+    </div>
+
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onClose()">Cerrar</button>
+  </div>
+</ng-container>

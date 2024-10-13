@@ -1,0 +1,9 @@
+<nav class="navbar">
+    <div class="navbar-container">
+      <a routerLink="/" class="navbar-brand">Mi Aplicación</a>
+      <a *ngIf="user?.role == 'admin'" routerLink="/espacios" class="navbar-link">Espacios</a>
+      <a routerLink="/reservas" class="navbar-link">Reservas</a>
+      <a routerLink="/" (click)="logout()" class="navbar-link">Salir</a>
+    </div>
+  </nav>
+  
